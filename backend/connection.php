@@ -13,5 +13,4 @@ $database = "web_project";
 		die("Connection Failed: " . $error->getMessage());
 	}
 
-
 ?>
