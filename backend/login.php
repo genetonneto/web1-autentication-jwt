@@ -22,7 +22,7 @@ include_once 'connection.php';
         // var_dump($data);
 
         if (!empty($data['signIn'])) {
-            var_dump($data);
+            // var_dump($data);
 
             $selectUserQuery = "SELECT id, name, email, password
 					FROM user
@@ -35,7 +35,7 @@ include_once 'connection.php';
 
             if (($resultUser) && ($resultUser->rowCount() != 0)) {
                 $rowUser = $resultUser->fetch(PDO::FETCH_ASSOC);
-                var_dump($rowUser);
+                // var_dump($rowUser);
 
                 if (password_verify($data['password'], $rowUser['password'])) {
 
@@ -44,13 +44,13 @@ include_once 'connection.php';
                         'alg' => 'HS256',
                         'typ' => 'JWT'
                     ];
-                    var_dump($header);
+                    // var_dump($header);
 
                     $header = json_encode($header);
-                    var_dump($header);
+                    // var_dump($header);
 
                     $header = base64_encode($header);
-                    var_dump($header);
+                    // var_dump($header);
 
                     // Payload
 
@@ -64,10 +64,10 @@ include_once 'connection.php';
                     ];
 
                     $payload = json_encode($payload);
-                    var_dump($payload);
+                    // var_dump($payload);
 
                     $payload = base64_encode($payload);
-                    var_dump($payload);
+                    // var_dump($payload);
 
                     // Signature
 
@@ -76,9 +76,12 @@ include_once 'connection.php';
                     $signature = hash_hmac('sha256', "$header.$payload", $key, true);
 
                     $signature = base64_encode($signature);
-                    var_dump($signature);
+                    // var_dump($signature);
 
                     echo "<p> Token: $header.$payload.$signature </p>";
+
+                    setcookie('token', "$header.$payload.$signature", time() + (7 * 24 * 60 * 60));
+                    header('Location: home.php');
 
                 } else {
                     $_SESSION['msg'] = "<p> Error: Incorrect email or password </p>";
