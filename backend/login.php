@@ -61,6 +61,7 @@ include_once 'connection.php';
                         // 'aud' => 'localhost',
                         'exp' => $expTime,
                         'id' => $rowUser['id'],
+                        'name' => $rowUser['name']
                     ];
 
                     $payload = json_encode($payload);
@@ -78,7 +79,7 @@ include_once 'connection.php';
                     $signature = base64_encode($signature);
                     // var_dump($signature);
 
-                    echo "<p> Token: $header.$payload.$signature </p>";
+                    echo "<p> Token : $header.$payload.$signature </p>";
 
                     setcookie('token', "$header.$payload.$signature", time() + (7 * 24 * 60 * 60));
                     header('Location: home.php');
