@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include_once 'connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +15,8 @@
     </header>
     <main>
         <section>
-            <a href="login.php">login</a>
+            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
         </section>    
     </main>
     <footer>
