@@ -24,20 +24,20 @@ include_once 'connection.php';
         if (!empty($data['signIn'])) {
             // var_dump($data);
 
-            $selectUserQuery = "SELECT id, name, email, password
+            $selectUserQuery = "SELECT use_id, use_name, use_email, use_password
 					FROM user
-					WHERE email =:email
+					WHERE use_email =:use_email
 					LIMIT 1";
 
             $resultUser = $pdo->prepare($selectUserQuery);
-            $resultUser->bindParam(':email', $data['email']);
+            $resultUser->bindParam(':use_email', $data['use_email']);
             $resultUser->execute();
 
             if (($resultUser) && ($resultUser->rowCount() != 0)) {
                 $rowUser = $resultUser->fetch(PDO::FETCH_ASSOC);
                 // var_dump($rowUser);
 
-                if (password_verify($data['password'], $rowUser['password'])) {
+                if (password_verify($data['use_password'], $rowUser['use_password'])) {
 
                     // Header
                     $header = [
@@ -102,23 +102,23 @@ include_once 'connection.php';
 
         <?php 
             $email = "";
-            if (isset($data['email'])) {
-                $email = $data['email'];
+            if (isset($data['use_email'])) {
+                $email = $data['use_email'];
             }
         ?>
 
         <form action="" method="POST">
             <label> Email: </label>
-            <input type="text" name="email" placeholder="Email" value="<?= $email ?>"><br>
+            <input type="text" name="use_email" placeholder="Email" value="<?= $email ?>"><br>
 
         <?php
         $password = "";
-        if (isset($data['password'])) {
-            $password = $data['password'];
+        if (isset($data['use_password'])) {
+            $password = $data['use_password'];
         }
         ?>
             <label>Password</label>
-            <input type="password" name="password" placeholder="Password" value="<?= $password ?>"><br>
+            <input type="password" name="use_password" placeholder="Password" value="<?= $password ?>"><br>
 
             <input type="submit" name="signIn" value="Enter">
         </form>

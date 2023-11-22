@@ -14,9 +14,13 @@ include_once 'connection.php';
         <h1>Index</h1>
     </header>
     <main>
-        <section>
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
+        <section class="NavBar">
+            <a href="#">Lorem</a>
+            <a href="#">Lorem</a>
+            <a href="#">Lorem</a>
+            <a href="#">Lorem</a>
+            <a href="/backend/login.php">Login</a>
+            <a href="/backend/register.php">Register</a>
         </section>    
     </main>
     <footer>
