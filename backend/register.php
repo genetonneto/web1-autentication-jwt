@@ -21,15 +21,15 @@ include_once 'connection.php';
             if (!empty($data['sendRegisterUser'])) {
                 // var_dump($data);
 
-                $selectUserQuery = "INSERT INTO user (name, email, password) VALUES (:name, :email, :password)";
+                $selectUserQuery = "INSERT INTO user (use_name, use_email, use_password) VALUES (:use_name, :use_email, :use_password)";
 
                 $registerUser = $pdo->prepare($selectUserQuery);
                 
-                $registerUser->bindParam(':name', $data['name']);
-                $registerUser->bindParam(':email', $data['email']);
+                $registerUser->bindParam(':use_name', $data['use_name']);
+                $registerUser->bindParam(':use_email', $data['use_email']);
                 
-                $passwordCript = password_hash($data['password'], PASSWORD_DEFAULT);
-                $registerUser->bindParam(':password', $passwordCript);
+                $passwordCript = password_hash($data['use_password'], PASSWORD_DEFAULT);
+                $registerUser->bindParam(':use_password', $passwordCript);
                 $registerUser->execute();
 
                 if ($registerUser->rowCount()) {
@@ -43,11 +43,11 @@ include_once 'connection.php';
 
         <form action="" method="POST">
             <label>Name:</label>
-            <input type="text" minlength="3" required name="name" placeholder="Name">
+            <input type="text" minlength="3" required name="use_name" placeholder="Name">
             <label>Email:</label>
-            <input type="text" required name="email" placeholder="Email">
+            <input type="text" required name="use_email" placeholder="Email">
             <label>Password:</label>
-            <input type="password" minlength="8" maxlength="20" required name="password" placeholder="Password">
+            <input type="password" minlength="8" maxlength="20" required name="use_password" placeholder="Password">
             <input type="submit" name="sendRegisterUser" value="Register">
         </form>
 
